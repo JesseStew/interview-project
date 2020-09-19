@@ -1,0 +1,97 @@
+<template>
+  <div class="home">
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+    <p>
+      hello
+    </p>
+  </div>
+</template>
+
+<script>
+
+export default {
+  name: 'Home',
+  components: {
+  }
+}
+</script>
