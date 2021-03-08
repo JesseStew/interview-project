@@ -1,4 +1,4 @@
-# porter-chiropractic
+# interview-project
 
 ## Project setup
 ```

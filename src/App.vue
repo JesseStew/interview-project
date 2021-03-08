@@ -1,56 +1,31 @@
 <template>
   <v-app>
-    <v-navigation-drawer
-      app
-      fixed
-      temporary
-      v-model="drawer"
-
-    >
-      <v-list>
-        <v-list-item :to="page.path" link v-for="page in pages" :key="page.id">
-          <v-list-item-icon>
-            <v-icon> {{page.icon}} </v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>
-              {{page.name}}
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
 
     <v-app-bar
       app
     >
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
       <span class="h3">
-        Title
+        Total: {{total}}
       </span>
       <v-spacer></v-spacer>
-      <template v-slot:extension>
-        <v-tabs
-          centered
-          center-active
-        >
-          <v-tab router :to="page.path" v-for="page in pages" :key="page.id">
-            {{ page.name }}
-          </v-tab>
-        </v-tabs>
-      </template>
     </v-app-bar>
 
     <v-main>
       <v-container fluid>
-        <router-view></router-view>
+        <v-checkbox v-model="highlightPrimes" label="Primes"></v-checkbox>
+        <v-row v-for="num in numGrid" :key="num.id">
+          <v-col v-for="col in num" :key="col.id">
+            <div v-if="col.isPrime" :class="highlightPrimes ? 'is-prime' : 'rectangle'">
+              {{ col.num }}
+            </div>
+            <div v-else class="rectangle">
+              {{ col.num }}
+            </div>
+          </v-col>
+        </v-row>
       </v-container>
     </v-main>
-
-    <v-footer app>
-      <!--  -->
-    </v-footer>
   </v-app>
 </template>
 
@@ -60,49 +35,93 @@ export default {
 
   components: {
   },
-
+  
   data() {
     return {
-      drawer: false,
-      pages: [
-        {
-          id: 0,
-          path: '/',
-          name: 'Home',
-          icon: 'mdi-home',
-        },
-        {
-          id: 1,
-          path: '/about',
-          name: 'About',
-          icon: 'mdi-account',
-        },
-        {
-          id: 2,
-          path: '/contact',
-          name: 'Contact',
-          icon: 'mdi-phone',
-        },
-        {
-          id: 3,
-          path: '/team',
-          name: 'Team',
-          icon: 'mdi-account-group',
-        },
-        {
-          id: 4,
-          path: '/treatments',
-          name: 'Treatments',
-          icon: 'mdi-hand-heart',
-        },
-        {
-          id: 5,
-          path: '/blog',
-          name: 'Blog',
-          icon: 'mdi-post',
-        },
-      ]
+      numGrid: [],
+      numArray: [],
+      highlightPrimes: false,
     }
   },
+  computed: {
+    total() {
+      let total = 0
+      if (this.highlightPrimes) {
+        this.numArray.forEach(element => {
+          if(element.isPrime) {
+            total += element.num
+          }
+        });
+        return total
+      } else {
+        this.numArray.forEach(element => {
+          total += element.num
+        })
+        return total
+      }
+    }
+  },
+  methods: {
+    isPrime() {
+      let count = 1
+      for (let row = 0; row < 10; row++) {
+        this.numGrid[row] = []
+        console.log(this.numGrid)
+        for (let col = 0; col < 10; col++) {
+          if(count === 2 || count === 3 || count === 5 || count === 7){
+            this.numGrid[row].push({
+              isPrime: true,
+              num: count
+            })
+            this.numArray.push({
+              isPrime: true,
+              num: count
+            })
+          }
+          else if(count % 2 === 0 || count % 3 === 0 || count % 5 === 0 || count % 7 === 0 || count === 1) {
+            this.numGrid[row].push({
+              isPrime: false,
+              num: count
+            })
+            this.numArray.push({
+              isPrime: false,
+              num: count
+            })
+          } else {
+            this.numGrid[row].push({
+              isPrime: true,
+              num: count
+            })
+            this.numArray.push({
+              isPrime: true,
+              num: count
+            })
+          }
+          count++
+        }
+      }
+      console.log(this.numGrid)
+    }
+  },
+  created() {
+    this.isPrime()
+  }
 };
 </script>
+
+<style scoped>
+.rectangle {
+  background: rgb(190, 190, 190);
+  text-align: center;
+  line-height: 5vh;
+  width: 5vw;
+  height: 5vh;
+}
+.is-prime {
+  background: rgb(250, 243, 142) !important;
+  text-align: center;
+  line-height: 5vh;
+  width: 5vw;
+  height: 5vh;
+}
+</style>
