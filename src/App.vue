@@ -62,7 +62,7 @@ export default {
     }
   },
   methods: {
-    isPrime() {
+    createNumGrid() {
       let count = 1
       for (let row = 0; row < 10; row++) {
         this.numGrid[row] = []
@@ -104,7 +104,7 @@ export default {
     }
   },
   created() {
-    this.isPrime()
+    this.createNumGrid()
   }
 };
 </script>
